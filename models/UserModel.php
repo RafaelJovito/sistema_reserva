@@ -6,8 +6,8 @@ class UserModel {
     public function __construct() {
         // Conexão com o banco de dados
         $servidor = 'localhost';
-        $usuarioBD = 'root';
-        $senhaBD = 'EAD2020$%';
+        $usuarioBD = ''; //adicione o seu usuario
+        $senhaBD = ''; //adicione a senha do banco
         $nomeBD = 'sistema_reserva';
 
         $this->conexao = mysqli_connect($servidor, $usuarioBD, $senhaBD, $nomeBD);
@@ -48,6 +48,7 @@ class UserModel {
     }
 
     function verifyPassword($password, $storedPassword) {
+        var_dump($password, $storedPassword); 
         // Verifica se a senha fornecida corresponde à senha armazenada
         return $password === $storedPassword;
     }

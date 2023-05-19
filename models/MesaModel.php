@@ -9,7 +9,7 @@ class MesaModel {
         $this->conexao = conectar();
     }
 
-    public function getMesasDisponiveis() {
+    public function obterMesasDisponiveis() {
         $sql = "SELECT * FROM mesas WHERE status = 'disponivel'";
         $resultado = mysqli_query($this->conexao, $sql);
 
@@ -63,3 +63,5 @@ class MesaModel {
         }
     }
 }
+
+?>

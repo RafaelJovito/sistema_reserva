@@ -12,8 +12,8 @@ class LoginController {
     public function autenticarUsuario($username, $password) {
         // Verifica as credenciais do usuário no modelo
         $usuario = $this->userModel->getUserByUsername($username);
-
-        if ($usuario && password_verify($password, $usuario['senha'])) {
+    
+        if ($usuario && $password === $usuario['senha']) {
             // As credenciais são válidas, retorna true
             return true;
         } else {

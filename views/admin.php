@@ -5,19 +5,21 @@ if (!isset($_SESSION['nome_usuario'])) {
     header('Location: login.php');
     exit;
 }
+
 // Obtém o nome do usuário logado
 $nomeUsuario = $_SESSION['nome_usuario'];
 
-// Aqui você pode adicionar o código para buscar as reservas e outras informações necessárias
-// ...
+// Inclui o arquivo do controlador
+require_once 'controllers/AdminController.php';
 
-// Logout do usuário
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    session_destroy();
-    header('Location: ../index.php');
-    exit;
-}
+// Cria uma instância do controlador
+//$adminController = new AdminController();
 
+// Obtém as reservas
+//$reservas = $adminController->exibirReservas();
+
+// Inclua o arquivo de exibição de reservas (crie um arquivo separado para isso)
+require_once 'views/exibir_reservas.php';
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </tr>
             </thead>
             <tbody>
-                <?php while ($reserva = mysqli_fetch_assoc($resultadoReservas)) { ?>
+                <?php foreach ($reservas as $reserva) { ?>
                     <tr>
                         <td><?php echo $reserva['id']; ?></td>
                         <td><?php echo $reserva['data']; ?></td>
@@ -55,26 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <td>
                             <a href="editar_reserva.php?id=<?php echo $reserva['id']; ?>" class="btn btn-primary">Editar</a>
                         </td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-
-        <h2 class="mt-4">Gerenciar Mesas</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($mesa = mysqli_fetch_assoc($resultadoMesas)) { ?>
-                    <tr>
-                        <td><?php echo $mesa['id']; ?></td>
-                        <td><?php echo $mesa['nome']; ?></td>
-                        <td><?php echo $mesa['descricao']; ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
